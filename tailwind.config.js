@@ -8,7 +8,7 @@ export default {
     extend: {},
     fontFamily:{
       signature:['Dynalight']
-    }
+    },
   },
   plugins: [],
 }
