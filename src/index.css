@@ -8,3 +8,11 @@
         @apply bg-black text-white h-screen w-screen
     }
 }
+
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+}
