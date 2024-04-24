@@ -10,8 +10,8 @@ export default {
       signature:['Dynalight']
     },
     boxShadow: {
-      customShadow: '-10px -12px 15px 8px #ffffff', // Assuming 'white' is meant to be '#ffffff'
-    }
+      customShadow: '-10px -12px 15px 8px #ffffff',
+    },
   },
   plugins: [],
 }

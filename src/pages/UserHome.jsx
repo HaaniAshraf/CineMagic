@@ -18,7 +18,9 @@ function UserHome() {
         <div className="absolute w-1/2 md:w-1/3 top-28 md:top-44 left-30 md:left-44 flex flex-col gap-3">
           <div className="flex gap-1">{stars}</div>
           <h1 className="font-bold text-4xl">OPPENHEIMER</h1>
-          <h4 className="font-semibold text-gray-300">Released on 21 July 2023</h4>
+          <h4 className="font-semibold text-gray-300">
+            Released on 21 July 2023
+          </h4>
           <p className="sm:mt-10 font-semibold">
             During World War II, Lt. Gen. Leslie Groves Jr. appoints physicist
             J. Robert Oppenheimer to work on the top-secret Manhattan Project.
