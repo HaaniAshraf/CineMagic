@@ -145,7 +145,7 @@ function Signup() {
           <div className="mt-5 text-white">
             Already a user?{" "}
             <span className="text-[#328282] font-semibold">
-              <Link to={"/"}>Login</Link>
+              <Link to={"/login"}>Login</Link>
             </span>
           </div>
         </div>
