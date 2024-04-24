@@ -1,14 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import bgImg from "../assets/interstellar.jpg";
 import Logo from "../assets/logo.png";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
-import { HiMiniDevicePhoneMobile } from "react-icons/hi2";
+import { MdOutlinePhoneIphone } from "react-icons/md";
 import { FiLock } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 
 function Signup() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    let tempErrors = {};
+    tempErrors.name = name ? "" : "Name is required";
+    tempErrors.email = email ? "" : "Email is required";
+    if (email && !/^\S+@\S+\.\S+$/.test(email))
+      tempErrors.email = "Email is invalid.";
+    tempErrors.phone = phone ? "" : "Phone number is required";
+    tempErrors.password = password ? "" : "Password is required";
+    tempErrors.confirmPassword = confirmPassword
+      ? ""
+      : "Confirm Password is required";
+    if (password && password !== confirmPassword)
+      tempErrors.confirmPassword = "Passwords do not match.";
+    setErrors(tempErrors);
+    return Object.values(tempErrors).every((x) => x === "");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      console.log({ name, email, phone });
+    }
+  };
+
   return (
     <div className="h-screen w-screen flex items-center justify-center common sm:px-0">
       <img src={bgImg} className="absolute h-full w-full object-cover" alt="" />
@@ -20,7 +51,7 @@ function Signup() {
           today!
         </span>
       </h2>
-      <div className="z-10 mt-28 sm:mt-20 relative bg-[#05050599] py-4 px-14 pb-8 rounded-lg text-center">
+      <div className="z-10 mt-28 sm:mt-20 relative bg-[#05050599] py-4 px-14 pb-8 rounded-lg">
         <div className="flex flex-col items-center">
           <div className="flex items-center justify-center">
             <img src={Logo} alt="CineMagic Logo" className="h-20" />
@@ -28,46 +59,84 @@ function Signup() {
               CineMagic
             </h2>
           </div>
-          <form className="flex flex-col gap-5 mt-4 w-full max-w-md">
-            <div className="flex gap-2 items-center bg-gray-900 pl-2 py-1 rounded-md">
-              <FaRegUserCircle className="text-gray-400 text-xl" />
-              <input
-                type="text"
-                className="bg-gray-900 pl-1 placeholder:text-gray-600 flex-grow"
-                placeholder="Name"
-              />
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 mt-4 w-full max-w-md"
+          >
+            <div className="flex flex-col gap-1">
+              <div className="flex gap-2 items-center bg-gray-900 pl-2 py-1 rounded-md">
+                <FaRegUserCircle className="text-gray-400 text-xl" />
+                <input
+                  type="text"
+                  className="bg-gray-900 pl-1 placeholder:text-gray-600 flex-grow"
+                  placeholder="Name"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                />
+              </div>
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name}</p>
+              )}
             </div>
-            <div className="flex gap-2 items-center bg-gray-900 pl-2 py-1 rounded-md">
-              <MdOutlineEmail className="text-gray-400 text-xl" />
-              <input
-                type="email"
-                className="bg-gray-900 pl-1 placeholder:text-gray-600 flex-grow"
-                placeholder="Email Address"
-              />
+            <div className="flex flex-col gap-1">
+              <div className="flex gap-2 items-center bg-gray-900 pl-2 py-1 rounded-md">
+                <MdOutlineEmail className="text-gray-400 text-xl" />
+                <input
+                  type="email"
+                  className="bg-gray-900 pl-1 placeholder:text-gray-600 flex-grow"
+                  placeholder="Email Address"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                />
+              </div>
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email}</p>
+              )}
             </div>
-            <div className="flex gap-2 items-center bg-gray-900 pl-2 py-1 rounded-md">
-              <HiMiniDevicePhoneMobile className="text-gray-400 text-xl" />
-              <input
-                type="number"
-                className="bg-gray-900 pl-1 placeholder:text-gray-600 flex-grow"
-                placeholder="Phone"
-              />
+            <div className="flex flex-col gap-1">
+              <div className="flex gap-2 items-center bg-gray-900 pl-2 py-1 rounded-md">
+                <MdOutlinePhoneIphone className="text-gray-400 text-xl" />
+                <input
+                  type="number"
+                  className="bg-gray-900 pl-1 placeholder:text-gray-600 flex-grow"
+                  placeholder="Phone"
+                  onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
+                />
+              </div>
+              {errors.phone && (
+                <p className="text-red-500 text-sm">{errors.phone}</p>
+              )}
             </div>
-            <div className="flex gap-2 items-center bg-gray-900 pl-2 py-2 rounded-md">
-              <FiLock className="text-gray-400 text-xl" />
-              <input
-                type="password"
-                className="bg-gray-900 pl-1 placeholder:text-gray-600 flex-grow"
-                placeholder="Password"
-              />
+            <div className="flex flex-col gap-1">
+              <div className="flex gap-2 items-center bg-gray-900 pl-2 py-2 rounded-md">
+                <FiLock className="text-gray-400 text-xl" />
+                <input
+                  type="password"
+                  className="bg-gray-900 pl-1 placeholder:text-gray-600 flex-grow"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                />
+              </div>
+              {errors.password && (
+                <p className="text-red-500 text-sm">{errors.password}</p>
+              )}
             </div>
-            <div className="flex gap-2 items-center bg-gray-900 pl-2 py-2 rounded-md">
-              <FiLock className="text-gray-400 text-xl" />
-              <input
-                type="password"
-                className="bg-gray-900 pl-1 placeholder:text-gray-600 flex-grow"
-                placeholder="Confirm Password"
-              />
+            <div className="flex flex-col gap-1">
+              <div className="flex gap-2 items-center bg-gray-900 pl-2 py-2 rounded-md">
+                <FiLock className="text-gray-400 text-xl" />
+                <input
+                  type="password"
+                  className="bg-gray-900 pl-1 placeholder:text-gray-600 flex-grow"
+                  placeholder="Confirm Password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  value={confirmPassword}
+                />
+              </div>
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm">{errors.confirmPassword}</p>
+              )}
             </div>
             <Button className="w-full bg-[#004c4c] hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150">
               Signup
