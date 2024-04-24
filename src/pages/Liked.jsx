@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "../components/Header";
 
-function About() {
+function Liked() {
   return (
     <div>
       <Header />
-      <h1>About</h1>
+      <h1>Liked</h1>
     </div>
   );
 }
 
-export default About;
+export default Liked;

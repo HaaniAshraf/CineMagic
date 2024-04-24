@@ -1,12 +1,21 @@
 import React from "react";
 import Logo from "../assets/logo.png";
 import { IoSearch } from "react-icons/io5";
+import { HiHome } from "react-icons/hi2";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { FaCircleUser } from "react-icons/fa6";
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 function Header() {
+  const [nav, setNav] = useState(false);
+  const closeNav = () => {
+    setNav(false);
+  };
   return (
-    <div className="common h-16 flex justify-between px-5 items-center">
+    <div className="common shadow-customShadow h-20 flex justify-between px-5 items-center fixed border-b-2 border-gray-700">
       <div className="flex items-center justify-center">
         <img src={Logo} alt="CineMagic Logo" className="h-10" />
         <h2 className="text-2xl font-semibold font-signature ml-4">
@@ -21,18 +30,81 @@ function Header() {
         />
         <IoSearch className="cursor-pointer absolute inset-y-0 right-7 sm:right-1 md:right-1 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#328282]" />
       </div>
-      <ul className="flex items-center gap-5">
-        <Link to={'/'}>
-        <li className={location.pathname === "/" ? "active-link" : "nav-item"}>Home</li>
+      <ul className="sm:flex hidden items-center md:gap-8 sm:gap-4">
+        <Link to={"/"}>
+          <li
+            className={location.pathname === "/" ? "active-link" : "nav-item"}
+          >
+            <HiHome />
+          </li>
         </Link>
-        <Link to={'/about'}>
-        <li className={location.pathname === "/about" ? "active-link" : "nav-item"}>About</li>
+        <Link to={"/liked"}>
+          <li
+            className={
+              location.pathname === "/liked" ? "active-link" : "nav-item"
+            }
+          >
+            <IoMdHeartEmpty />
+          </li>
         </Link>
-        <Link to={'/profile'}>
-        <li className={location.pathname === "/profile" ? "active-link" : "nav-item"}>Profile</li>
+        <Link to={"/profile"}>
+          <li
+            className={
+              location.pathname === "/profile" ? "active-link" : "nav-item"
+            }
+          >
+            <FaCircleUser />
+          </li>
         </Link>
-        <Button className="bg-[#2e7878] p-1 hover:bg-[#2a6868]">Subscribe</Button>
+        <Button className="bg-[#2e7878] p-1 sm:text-sm md:text-base hover:bg-[#2a6868]">
+          Subscribe
+        </Button>
       </ul>
+      <div className="sm:hidden">
+        <button
+          onClick={() => setNav(!nav)}
+          className="text-3xl pr-2 pt-2 text-gray-500 hover:text-[#3e9e9e]"
+        >
+          {nav ? <FaTimes /> : <FaBars />}
+        </button>
+        {nav && (
+          <ul className="flex flex-col items-center justify-center bg-gray-900 text-white absolute top-16 left-0 w-full py-4 border-b border-gray-200">
+            <li className="my-2">
+              <Link
+                to={"/"}
+                onClick={closeNav}
+                className=" hover:text-[#3e9e9e] font-semibold text-xl"
+              >
+                Home
+              </Link>
+            </li>
+            <li className="my-2">
+              <Link
+                to={"/liked"}
+                onClick={closeNav}
+                className=" hover:text-[#3e9e9e] font-semibold text-xl"
+              >
+                Liked
+              </Link>
+            </li>
+            <li className="my-2">
+              <Link
+                to={"/profile"}
+                onClick={closeNav}
+                className=" hover:text-[#3e9e9e] font-semibold text-xl"
+              >
+                Profile
+              </Link>
+            </li>
+
+            <li className="my-2">
+              <Button className="bg-[#2e7878] p-1 sm:text-sm md:text-base hover:bg-[#2a6868]">
+                Subscribe
+              </Button>
+            </li>
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
