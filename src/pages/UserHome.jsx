@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../components/Header";
 import bgImg from "../assets/banners/oppen.jpeg";
 import { FaStar } from "react-icons/fa6";
 import Button from "../components/Button";
@@ -10,14 +9,13 @@ function UserHome() {
     .map((_, index) => <FaStar key={index} className="text-yellow-400" />);
   return (
     <div>
-      <Header />
       <div className="h-screen w-screen common flex flex-col items-center justify-center">
         <img
           src={bgImg}
           alt=""
           className="h-5/6 w-5/6 rounded-xl relative bg-cover pt-7"
         />
-        <div className="absolute z-10 w-1/2 md:w-1/3 top-28 md:top-44 left-30 md:left-44 flex flex-col gap-3">
+        <div className="absolute w-1/2 md:w-1/3 top-28 md:top-44 left-30 md:left-44 flex flex-col gap-3">
           <div className="flex gap-1">{stars}</div>
           <h1 className="font-bold text-4xl">OPPENHEIMER</h1>
           <h4 className="font-semibold text-gray-300">Released on 21 July 2023</h4>

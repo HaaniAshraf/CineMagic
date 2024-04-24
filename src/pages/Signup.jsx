@@ -5,8 +5,10 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import { MdOutlinePhoneIphone } from "react-icons/md";
 import { FiLock } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { useDispatch } from "react-redux";
+import { saveUserDetails } from "../redux/reducers/userReducer";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -16,6 +18,8 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const validate = () => {
     let tempErrors = {};
     tempErrors.name = name ? "" : "Name is required";
@@ -32,11 +36,12 @@ function Signup() {
     setErrors(tempErrors);
     return Object.values(tempErrors).every((x) => x === "");
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log({ name, email, phone });
+      const userDetails = { name, email, phone, password };
+      dispatch(saveUserDetails(userDetails)); // Assumes `saveUserDetails` is correctly defined to handle this payload
+      navigate("/");
     }
   };
 

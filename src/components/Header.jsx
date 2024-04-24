@@ -15,7 +15,7 @@ function Header() {
     setNav(false);
   };
   return (
-    <div className="common shadow-customShadow h-20 flex justify-between px-5 items-center fixed border-b-2 border-gray-700">
+    <div className="common shadow-customShadow h-20 z-50 flex justify-between px-5 items-center fixed border-b-2 border-gray-700">
       <div className="flex items-center justify-center">
         <img src={Logo} alt="CineMagic Logo" className="h-10" />
         <h2 className="text-2xl font-semibold font-signature ml-4">
@@ -68,7 +68,7 @@ function Header() {
           {nav ? <FaTimes /> : <FaBars />}
         </button>
         {nav && (
-          <ul className="flex flex-col items-center justify-center bg-gray-900 text-white absolute top-16 left-0 w-full py-4 border-b border-gray-200">
+          <ul className="flex flex-col items-center justify-center bg-[#0c0c0c] text-white absolute top-16 left-0 w-full py-4 border-b border-gray-200">
             <li className="my-2">
               <Link
                 to={"/"}
