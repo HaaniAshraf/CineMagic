@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <footer className="bg-gray-950 text-white py-6">
-      <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
+      <div className="px-4 flex flex-wrap items-center justify-between">
         <div className="flex flex-col md:flex-row text-sm text-gray-400">
           <p className="mt-2 md:mt-0">© 2024 CineMagic. All rights reserved.</p>
           <nav className="flex flex-wrap md:pl-4 mt-2 md:mt-0">

@@ -15,20 +15,20 @@ function Header() {
     setNav(false);
   };
   return (
-    <div className="common shadow-customShadow h-20 z-50 flex justify-between px-5 items-center fixed border-b-2 border-gray-700">
+    <div className="common shadow-customShadow h-20 z-50 flex justify-between px-7 items-center fixed border-b-2 border-gray-700">
       <div className="flex items-center justify-center">
         <img src={Logo} alt="CineMagic Logo" className="h-10" />
         <h2 className="text-2xl font-semibold font-signature ml-4">
           CineMagic
         </h2>
       </div>
-      <div className="w-1/2 sm:w-1/4 md:w-1/3 relative h-9">
+      <div className="w-1/2 sm:w-1/3 md:w-1/3 relative h-9">
         <input
           type="text"
           className="w-full sm:w-full sm:ml pl-2 h-full rounded-md bg-gray-800 placeholder-pl-2 placeholder-ml-2"
           placeholder="Search"
         />
-        <IoSearch className="cursor-pointer absolute inset-y-0 right-7 sm:right-1 md:right-1 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#328282]" />
+        <IoSearch className="cursor-pointer absolute inset-y-0 right-2 sm:right-1 md:right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#328282]" />
       </div>
       <ul className="sm:flex hidden items-center md:gap-8 sm:gap-4">
         <Link to={"/"}>
