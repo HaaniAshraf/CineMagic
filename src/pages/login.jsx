@@ -6,8 +6,11 @@ import { MdOutlineEmail } from "react-icons/md";
 import { FiLock } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { useDispatch } from "react-redux";
+import { saveUserDetails } from "../redux/reducers/userReducer";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -15,19 +18,19 @@ const Login = () => {
   } = useForm();
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
-  const getUserDetails = () => {
-    const userString = localStorage.getItem("user");
-    const userObj = userString ? JSON.parse(userString) : null;
-    return userObj ? userObj.userDetails : null;
+  const getUserDetails = (email, password) => {
+    const users = localStorage.getItem("users");
+    const parsedUsers = JSON.parse(users);
+    return parsedUsers.find(
+      (user) => user.email === email && user.password === password
+    );
   };
+
   const onSubmit = (data) => {
     const { email, password } = data;
-    const userDetails = getUserDetails();
-    if (
-      userDetails &&
-      userDetails.email === email &&
-      userDetails.password === password
-    ) {
+    const userDetails = getUserDetails(email, password);
+    if (userDetails) {
+      dispatch(saveUserDetails(userDetails));
       navigate("/home");
     } else {
       setLoginError("User does not exist. Please Signup.");

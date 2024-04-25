@@ -20,18 +20,21 @@ function Signup() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const getUserDetails = () => {
-    const userString = localStorage.getItem("user");
-    return userString ? JSON.parse(userString).userDetails : null;
+  const getUsers = () => {
+    const users = localStorage.getItem("users");
+    return users ? JSON.parse(users) : [];
+  };
+  const userExists = (email) => {
+    const users = getUsers();
+    return users.some((user) => user.email === email);
   };
   const validate = () => {
     let tempErrors = {};
-    const existingUser = getUserDetails();
     tempErrors.name = name ? "" : "Name is required";
     tempErrors.email = email ? "" : "Email is required";
     if (email && !/^\S+@\S+\.\S+$/.test(email)) {
       tempErrors.email = "Email is invalid.";
-    } else if (existingUser && existingUser.email === email) {
+    } else if (userExists(email)) {
       tempErrors.email = "Email already exists.";
     }
     tempErrors.phone = phone ? "" : "Phone number is required";
@@ -48,9 +51,15 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      const userDetails = { name, email, phone, password };
-      localStorage.setItem("user", JSON.stringify({ userDetails }));
-      dispatch(saveUserDetails(userDetails));
+      const newUserDetails = { name, email, phone, password };
+      const users = getUsers();
+      if (userExists(email)) {
+        setErrors({ ...errors, email: "Email already exists." });
+        return;
+      }
+      users.push(newUserDetails);
+      localStorage.setItem("users", JSON.stringify(users));
+      dispatch(saveUserDetails(newUserDetails));
       navigate("/");
     }
   };

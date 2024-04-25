@@ -5,11 +5,12 @@ import { HiHome } from "react-icons/hi2";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { FaCircleUser } from "react-icons/fa6";
 import Button from "./Button";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 function Header() {
+  const location = useLocation();
   const [nav, setNav] = useState(false);
   const closeNav = () => {
     setNav(false);
