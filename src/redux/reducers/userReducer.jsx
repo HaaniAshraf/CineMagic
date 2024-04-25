@@ -6,7 +6,7 @@ const userSlice = createSlice({
   },
   reducers: {
     saveUserDetails: (state, action) => {
-      const { password, confirmPassword, ...userData } = action.payload;
+      const { confirmPassword, ...userData } = action.payload;
       state.userDetails = userData;
     },
   },

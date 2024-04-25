@@ -31,9 +31,9 @@ function Header() {
         <IoSearch className="cursor-pointer absolute inset-y-0 right-2 sm:right-1 md:right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#328282]" />
       </div>
       <ul className="sm:flex hidden items-center md:gap-8 sm:gap-4">
-        <Link to={"/"}>
+        <Link to={"/home"}>
           <li
-            className={location.pathname === "/" ? "active-link" : "nav-item"}
+            className={location.pathname === "/home" ? "active-link" : "nav-item"}
           >
             <HiHome />
           </li>
@@ -71,7 +71,7 @@ function Header() {
           <ul className="flex flex-col items-center justify-center bg-[#0c0c0c] text-white absolute top-16 left-0 w-full py-4 border-b border-gray-200">
             <li className="my-2">
               <Link
-                to={"/"}
+                to={"/home"}
                 onClick={closeNav}
                 className=" hover:text-[#3e9e9e] font-semibold text-xl"
               >

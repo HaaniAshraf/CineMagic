@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Logo from "../assets/logo.png";
 import BgImg from "../assets/batman.jpg";
 import { MdOutlineEmail } from "react-icons/md";
 import { FiLock } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 
 const Login = () => {
@@ -13,8 +13,25 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [loginError, setLoginError] = useState("");
+  const navigate = useNavigate();
+  const getUserDetails = () => {
+    const userString = localStorage.getItem("user");
+    const userObj = userString ? JSON.parse(userString) : null;
+    return userObj ? userObj.userDetails : null;
+  };
   const onSubmit = (data) => {
-    const { password, ...otherdata } = data;
+    const { email, password } = data;
+    const userDetails = getUserDetails();
+    if (
+      userDetails &&
+      userDetails.email === email &&
+      userDetails.password === password
+    ) {
+      navigate("/home");
+    } else {
+      setLoginError("User does not exist. Please Signup.");
+    }
   };
   return (
     <div className="h-screen w-screen flex items-center justify-center common">
@@ -49,7 +66,7 @@ const Login = () => {
               />
             </div>
             {errors.email && (
-              <span className="text-red-500 text-sm">Email is required</span>
+              <span className="text-red-400 text-sm">Email is required</span>
             )}
             <div className="flex gap-2 items-center bg-gray-900 pl-2 py-1 rounded-md mt-4">
               <FiLock className="text-gray-400 text-xl" />
@@ -69,6 +86,9 @@ const Login = () => {
             >
               Login
             </Button>
+            {loginError && (
+              <p className="text-red-500 text-sm mt-4">{loginError}</p>
+            )}
           </form>
           <div className="mt-4 text-gray-500">Forget Password?</div>
           <div className="mt-2">

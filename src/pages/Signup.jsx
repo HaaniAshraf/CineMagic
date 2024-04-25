@@ -20,12 +20,20 @@ function Signup() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const getUserDetails = () => {
+    const userString = localStorage.getItem("user");
+    return userString ? JSON.parse(userString).userDetails : null;
+  };
   const validate = () => {
     let tempErrors = {};
+    const existingUser = getUserDetails();
     tempErrors.name = name ? "" : "Name is required";
     tempErrors.email = email ? "" : "Email is required";
-    if (email && !/^\S+@\S+\.\S+$/.test(email))
+    if (email && !/^\S+@\S+\.\S+$/.test(email)) {
       tempErrors.email = "Email is invalid.";
+    } else if (existingUser && existingUser.email === email) {
+      tempErrors.email = "Email already exists.";
+    }
     tempErrors.phone = phone ? "" : "Phone number is required";
     tempErrors.password = password ? "" : "Password is required";
     tempErrors.confirmPassword = confirmPassword
@@ -34,14 +42,16 @@ function Signup() {
     if (password && password !== confirmPassword)
       tempErrors.confirmPassword = "Passwords do not match.";
     setErrors(tempErrors);
+    // Checking if every element x is an empty string ("").
     return Object.values(tempErrors).every((x) => x === "");
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
       const userDetails = { name, email, phone, password };
-      dispatch(saveUserDetails(userDetails)); // Assumes `saveUserDetails` is correctly defined to handle this payload
-      navigate("/login");
+      localStorage.setItem("user", JSON.stringify({ userDetails }));
+      dispatch(saveUserDetails(userDetails));
+      navigate("/");
     }
   };
 
@@ -150,7 +160,7 @@ function Signup() {
           <div className="mt-5 text-white">
             Already a user?{" "}
             <span className="text-[#328282] font-semibold">
-              <Link to={"/login"}>Login</Link>
+              <Link to={"/"}>Login</Link>
             </span>
           </div>
         </div>
