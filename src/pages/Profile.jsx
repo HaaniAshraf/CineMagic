@@ -11,7 +11,7 @@ function Profile() {
     );
   }
   return (
-    <div className="common pb-44 flex flex-col items-center pt-28">
+    <div className="common w-full flex flex-col items-center pt-28">
       <h2 className="sm:text-3xl text-2xl font-bold mb-4 text-center text-gray-300">
         Profile
       </h2>

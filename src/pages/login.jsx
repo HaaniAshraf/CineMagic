@@ -15,7 +15,6 @@ const Login = () => {
   } = useForm();
   const onSubmit = (data) => {
     const { password, ...otherdata } = data;
-    console.log(otherdata);
   };
   return (
     <div className="h-screen w-screen flex items-center justify-center common">

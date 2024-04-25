@@ -41,7 +41,7 @@ function Signup() {
     if (validate()) {
       const userDetails = { name, email, phone, password };
       dispatch(saveUserDetails(userDetails)); // Assumes `saveUserDetails` is correctly defined to handle this payload
-      navigate("/");
+      navigate("/login");
     }
   };
 

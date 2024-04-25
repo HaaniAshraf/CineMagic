@@ -1,9 +1,9 @@
 import React from "react";
 import Login from "./pages/login";
 import Signup from "./pages/Signup";
-import Header from "./components/Header";
 import UserHome from "./pages/UserHome";
 import Liked from "./pages/Liked";
+import Error from "./components/Error";
 import Profile from "./pages/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -18,6 +18,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="/" element={<UserLayout />}>
+            <Route path="*" element={<Error />} />
             <Route index element={<UserHome />} />
             <Route path="liked" element={<Liked />} />
             <Route path="profile" element={<Profile />} />
