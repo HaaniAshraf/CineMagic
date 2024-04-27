@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import Store from "./redux/store";
 import UserLayout from "./layout/userLayout";
+import AdminHome from "./pages/AdminHome";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/liked" element={<Liked />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
+          <Route path="/adminHome" element={<AdminHome />} />
         </Routes>
       </BrowserRouter>
     </Provider>
