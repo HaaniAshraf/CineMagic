@@ -3,8 +3,12 @@ import Logo from "../assets/logo.png";
 import Button from "../components/Button";
 import { LuPlusCircle } from "react-icons/lu";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { useMovies } from "../Context/MovieContext";
 
 function AdminHome() {
+  const { movies } = useMovies();
+  const navigate = useNavigate();
   return (
     <div className="common">
       <div className="flex justify-between items-center px-5 py-3">
@@ -19,10 +23,12 @@ function AdminHome() {
         </div>
       </div>
       <div className="w-full flex items-end justify-end px-5">
-        <Button className="bg-[#004c4c] w-36 h-10 hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150 flex items-center justify-center gap-1">
-          <span>Add Movie</span>
-          <LuPlusCircle />
-        </Button>
+        <Link to={"/addMovie"}>
+          <Button className="bg-[#004c4c] w-36 h-10 hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150 flex items-center justify-center gap-1">
+            <span>Add Movie</span>
+            <LuPlusCircle />
+          </Button>
+        </Link>
       </div>
       <h1 className="text-center text-3xl mt-5 font-bold text-[#3c9b9b]">
         Movies
@@ -40,29 +46,43 @@ function AdminHome() {
             </tr>
           </thead>
           <tbody>
-            <tr className="text-center">
-              <td className="border border-gray-800 px-4 py-2">hahah</td>
-              <td className="border border-gray-800 px-4 py-2">
-                <img src="" alt="Movie Poster" className="h-20 mx-auto" />
-              </td>
-              <td className="border border-gray-800 px-4 py-2">huhuhu</td>
-              <td className="border border-gray-800 px-4 py-2">dfgdfsg</td>
-              <td className="border border-gray-800 px-4 py-2">asfgsdfg</td>
-              <td className="border border-gray-800 px-4 py-2">
-                <button
-                  className="text-yellow-500 hover:text-yellow-700 mx-2 text-xl"
-                  onClick={() => onEdit(movie)}
-                >
-                  <FaEdit />
-                </button>
-                <button
-                  className="text-red-500 hover:text-red-700 mx-2 text-xl"
-                  onClick={() => onDelete(movie.id)}
-                >
-                  <FaTrash />
-                </button>
-              </td>
-            </tr>
+            {movies.map((movie, index) => (
+              <tr key={index} className="text-center">
+                <td className="border border-gray-800 px-4 py-2">
+                  {movie.title}
+                </td>
+                <td className="border border-gray-800 px-4 py-2">
+                  <img
+                    src={movie.poster}
+                    alt="Movie Poster"
+                    className="h-20 mx-auto"
+                  />
+                </td>
+                <td className="border border-gray-800 px-4 py-2">
+                  {movie.description}
+                </td>
+                <td className="border border-gray-800 px-4 py-2">
+                  {movie.cast}
+                </td>
+                <td className="border border-gray-800 px-4 py-2">
+                  {movie.rating}
+                </td>
+                <td className="border border-gray-800 px-4 py-2">
+                  <button
+                    className="text-yellow-500 hover:text-yellow-700 mx-2 text-xl"
+                    onClick={() => onEdit(movie)}
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    className="text-red-500 hover:text-red-700 mx-2 text-xl"
+                    onClick={() => onDelete(movie.id)}
+                  >
+                    <FaTrash />
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
