@@ -3,12 +3,12 @@ import Logo from "../assets/logo.png";
 import Button from "../components/Button";
 import { LuPlusCircle } from "react-icons/lu";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMovies } from "../Context/MovieContext";
 
 function AdminHome() {
   const { movies } = useMovies();
-  const navigate = useNavigate();
+  console.log('movies',movies);
   return (
     <div className="common">
       <div className="flex justify-between items-center px-5 py-3">

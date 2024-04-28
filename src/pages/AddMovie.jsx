@@ -4,19 +4,23 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { MovieValidation } from "../utils/MovieValidation";
 import Logo from "../assets/logo.png";
 import Button from "../components/Button";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 
 function AddMovie() {
   const { addMovie } = useMovies();
   const [poster, setPoster] = useState(null);
   const [trailer, setTrailer] = useState(null);
+  const [posterError, setPosterError] = useState("");
+  const [trailerError, setTrailerError] = useState("");
   const navigate = useNavigate();
   const handlePosterChange = (event) => {
     setPoster(event.currentTarget.files[0]);
+    setPosterError("");
   };
   const handleTrailerChange = (event) => {
     setTrailer(event.currentTarget.files[0]);
+    setTrailerError("");
   };
   return (
     <div className="common w-full h-screen flex items-center justify-center">
@@ -31,19 +35,27 @@ function AddMovie() {
         }}
         validationSchema={MovieValidation}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          const formData = new FormData();
-          formData.append("title", values.title);
-          formData.append("cast", values.cast);
-          formData.append("description", values.description);
-          formData.append("rating", values.rating);
-          formData.append("poster", poster);
-          formData.append("trailer", trailer);
-          addMovie(formData);
+          if (!poster || !trailer) {
+            if (!poster) setPosterError("Poster file is required");
+            if (!trailer) setTrailerError("Trailer file is required");
+            setSubmitting(false);
+            return;
+          }
+          const movieData = {
+            title: values.title,
+            cast: values.cast,
+            description: values.description,
+            rating: values.rating,
+            poster: URL.createObjectURL(poster),
+            trailer: URL.createObjectURL(trailer)
+          };
+          console.log('movieData:',movieData);
+          addMovie(movieData);
           setSubmitting(false);
           resetForm();
           setPoster(null);
           setTrailer(null);
-          navigate('/adminHome')
+          navigate("/adminHome");
         }}
       >
         {() => (
@@ -77,7 +89,9 @@ function AddMovie() {
                   className=""
                   accept="image/*"
                 />
-                {poster && <div>File: {poster.name}</div>}
+                {posterError && (
+                  <div className="text-red-400">{posterError}</div>
+                )}
               </div>
               <div className="flex flex-col gap-1">
                 <label htmlFor="title"> Cast :</label>
@@ -129,12 +143,14 @@ function AddMovie() {
                   className="file-input"
                   accept="video/*"
                 />
-                {trailer && <div>File: {trailer.name}</div>}
+                {trailerError && (
+                  <div className="text-red-400">{trailerError}</div>
+                )}
               </div>
               <div className="w-full flex items-center justify-center">
                 <Button
                   type="submit"
-                  className="bg-[#004c4c] w-36 h-10 hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150"               
+                  className="bg-[#004c4c] w-36 h-10 hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150"
                 >
                   Add Movie
                 </Button>
