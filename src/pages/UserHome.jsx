@@ -3,13 +3,16 @@ import bgImg from "../assets/banners/oppen.jpeg";
 import { FaStar } from "react-icons/fa6";
 import Button from "../components/Button";
 import { FaPlay, FaRupeeSign } from "react-icons/fa";
+import { useMovies } from "../Context/MovieContext";
 
 function UserHome() {
+  const {movies}=useMovies()
   const stars = Array(5)
     .fill(0)
     .map((_, index) => <FaStar key={index} className="text-yellow-400" />);
   return (
-      <div className="h-screen w-full common flex flex-col items-center justify-center">
+    <div className="flex flex-col bg-black text-white">
+      <div className="w-full common flex flex-col items-center justify-center">
         <img
           src={bgImg}
           alt=""
@@ -39,6 +42,16 @@ function UserHome() {
           </div>
         </div>
       </div>
+      <div className="md:px-20 pb-40 px-6 sm:px-10 flex flex-col gap-5">
+      <h2 className="font-bold text-3xl md:w-1/6 w-1/2 sm:w-1/3 text-center border-b-4 border-gray-900 pb-2">Popular Shows</h2>
+      {movies.map((movie,index)=>(
+        <div key={index}>
+          <img src={movie.poster}/>
+          <h1>{movie.title}</h1>
+        </div>
+      ))}
+      </div>
+    </div>
   );
 }
 

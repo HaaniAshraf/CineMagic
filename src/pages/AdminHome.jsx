@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 import { useMovies } from "../Context/MovieContext";
 
 function AdminHome() {
-  const { movies } = useMovies();
-  console.log('movies',movies);
+  const { movies, deleteMovie } = useMovies();
+  const handleDelete = (movieId) => {
+    deleteMovie(movieId);
+  };
   return (
     <div className="common">
       <div className="flex justify-between items-center px-5 py-3">
@@ -42,6 +44,7 @@ function AdminHome() {
               <th className="px-4 py-2">Description</th>
               <th className="px-4 py-2">Cast</th>
               <th className="px-4 py-2">Rating</th>
+              <th className="px-4 py-2">Trailer</th>
               <th className="px-4 py-2">Actions</th>
             </tr>
           </thead>
@@ -68,6 +71,16 @@ function AdminHome() {
                   {movie.rating}
                 </td>
                 <td className="border border-gray-800 px-4 py-2">
+                  <video
+                    src={movie.trailer}
+                    alt="Movie Trailer"
+                    className="h-20 mx-auto"
+                    autoPlay
+                    controls
+                    muted
+                  ></video>
+                </td>
+                <td className="border border-gray-800 px-4 py-2">
                   <button
                     className="text-yellow-500 hover:text-yellow-700 mx-2 text-xl"
                     onClick={() => onEdit(movie)}
@@ -76,7 +89,7 @@ function AdminHome() {
                   </button>
                   <button
                     className="text-red-500 hover:text-red-700 mx-2 text-xl"
-                    onClick={() => onDelete(movie.id)}
+                    onClick={() => handleDelete(movie.id)}
                   >
                     <FaTrash />
                   </button>

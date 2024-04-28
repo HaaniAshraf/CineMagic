@@ -49,7 +49,6 @@ function AddMovie() {
             poster: URL.createObjectURL(poster),
             trailer: URL.createObjectURL(trailer)
           };
-          console.log('movieData:',movieData);
           addMovie(movieData);
           setSubmitting(false);
           resetForm();
