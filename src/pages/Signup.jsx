@@ -99,7 +99,7 @@ function Signup() {
                 />
               </div>
               {errors.name && (
-                <p className="text-red-500 text-sm">{errors.name}</p>
+                <p className="text-red-400 text-sm">{errors.name}</p>
               )}
             </div>
             <div className="flex flex-col gap-1">
@@ -114,7 +114,7 @@ function Signup() {
                 />
               </div>
               {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email}</p>
+                <p className="text-red-400 text-sm">{errors.email}</p>
               )}
             </div>
             <div className="flex flex-col gap-1">
@@ -129,7 +129,7 @@ function Signup() {
                 />
               </div>
               {errors.phone && (
-                <p className="text-red-500 text-sm">{errors.phone}</p>
+                <p className="text-red-400 text-sm">{errors.phone}</p>
               )}
             </div>
             <div className="flex flex-col gap-1">
@@ -144,7 +144,7 @@ function Signup() {
                 />
               </div>
               {errors.password && (
-                <p className="text-red-500 text-sm">{errors.password}</p>
+                <p className="text-red-400 text-sm">{errors.password}</p>
               )}
             </div>
             <div className="flex flex-col gap-1">
@@ -159,10 +159,10 @@ function Signup() {
                 />
               </div>
               {errors.confirmPassword && (
-                <p className="text-red-500 text-sm">{errors.confirmPassword}</p>
+                <p className="text-red-400 text-sm">{errors.confirmPassword}</p>
               )}
             </div>
-            <Button className="w-full bg-[#004c4c] hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150">
+            <Button type="submit" className="w-full bg-[#004c4c] hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150">
               Signup
             </Button>
           </form>

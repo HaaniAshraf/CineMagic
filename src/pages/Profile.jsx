@@ -5,7 +5,7 @@ function Profile() {
   const userDetails = useSelector((store) => store.user.userDetails);
   if (!userDetails) {
     return (
-      <div className="pt-28 common pb-64 sm:text-3xl text-2xl font-bold mb-4 text-center">
+      <div className="pt-28 common bg-black text-white sm:text-3xl text-2xl font-bold text-center">
         Loading...
       </div>
     );

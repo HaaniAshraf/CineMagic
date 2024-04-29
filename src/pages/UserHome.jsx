@@ -32,9 +32,11 @@ function UserHome() {
             changing the course of history.
           </p>
           <div className="flex gap-4 mt-8 sm:mt-16 md:mt-12">
+            <a href="https://www.youtube.com/watch?v=uYPbbksJxIg" className="w-full">
             <Button className="w-full flex items-center justify-center gap-2 bg-gray-900 hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150">
               <FaPlay /> <span>Trailer</span>
             </Button>
+            </a>
             <Button className="w-full flex items-center justify-center gap-2 bg-gray-900 hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150">
               <FaRupeeSign /> <span>Buy</span>
             </Button>

@@ -81,7 +81,7 @@ const Login = () => {
               />
             </div>
             {errors.password && (
-              <span className="text-red-500 text-sm">Password is required</span>
+              <span className="text-red-400 text-sm">Password is required</span>
             )}
             <Button
               type="submit"
@@ -90,7 +90,7 @@ const Login = () => {
               Login
             </Button>
             {loginError && (
-              <p className="text-red-500 text-sm mt-4">{loginError}</p>
+              <p className="text-red-400 text-sm mt-4">{loginError}</p>
             )}
           </form>
           <div className="mt-4 text-gray-500">Forget Password?</div>

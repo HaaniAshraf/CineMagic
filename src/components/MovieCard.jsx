@@ -29,7 +29,7 @@ function MovieCard() {
             {movie.title}
           </h1>
           <div className="text-center mt-3 flex gap-1 text-xl">
-            {renderStars(Math.round(movie.rating))}
+            {renderStars(movie.rating)}
           </div>
         </div>
       ))}
