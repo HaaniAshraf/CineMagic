@@ -85,26 +85,23 @@ function AdminHome() {
                     opts={{
                       height: "150",
                       width: "200",
-                      playerVars: { autoplay: 1, mute: 1 },
-                      
+                      playerVars: { mute: 1 },
                     }}
                   />
                 </td>
                 <td className="border border-gray-800 px-4 py-2">
                   <div className="flex flex-col gap-5 items-center justify-center">
-
-                  <button
-                    className="text-yellow-500 hover:text-yellow-700 mx-2 text-xl"
-                    onClick={() => onEdit(movie)}
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    className="text-red-500 hover:text-red-700 mx-2 text-xl"
-                    onClick={() => handleDelete(movie.id)}
-                  >
-                    <FaTrash />
-                  </button>
+                    <Link to={`/editMovie/${movie.id}`}>
+                      <button className="text-yellow-500 hover:text-yellow-700 mx-2 text-xl">
+                        <FaEdit />
+                      </button>
+                    </Link>
+                    <button
+                      className="text-red-500 hover:text-red-700 mx-2 text-xl"
+                      onClick={() => handleDelete(movie.id)}
+                    >
+                      <FaTrash />
+                    </button>
                   </div>
                 </td>
               </tr>

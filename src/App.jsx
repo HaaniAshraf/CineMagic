@@ -31,7 +31,7 @@ function App() {
             </Route>
             <Route path="/adminHome" element={<AdminHome />} />
             <Route path="/addMovie" element={<AddMovie />} />
-            <Route path="/editMovie" element={<EditMovie />} />
+            <Route path="/editMovie/:movieId" element={<EditMovie />} />
           </Routes>
         </MovieProvider>
       </BrowserRouter>
