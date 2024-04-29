@@ -5,14 +5,23 @@ import { LuPlusCircle } from "react-icons/lu";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useMovies } from "../Context/MovieContext";
+import YouTube from "react-youtube";
 
 function AdminHome() {
   const { movies, deleteMovie } = useMovies();
+  // Function to extract YouTube ID from URL
+  const getYouTubeId = (url) => {
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : null;
+  };
+
   const handleDelete = (movieId) => {
     deleteMovie(movieId);
   };
   return (
-    <div className="common">
+    <div className="common h-screen pb-24 w-full">
       <div className="flex justify-between items-center px-5 py-3">
         <div className="flex items-center">
           <img src={Logo} alt="CineMagic Logo" className="h-16" />
@@ -71,16 +80,19 @@ function AdminHome() {
                   {movie.rating}
                 </td>
                 <td className="border border-gray-800 px-4 py-2">
-                  <video
-                    src={movie.trailer}
-                    alt="Movie Trailer"
-                    className="h-20 mx-auto"
-                    autoPlay
-                    controls
-                    muted
-                  ></video>
+                  <YouTube
+                    videoId={getYouTubeId(movie.trailer)}
+                    opts={{
+                      height: "150",
+                      width: "200",
+                      playerVars: { autoplay: 1, mute: 1 },
+                      
+                    }}
+                  />
                 </td>
                 <td className="border border-gray-800 px-4 py-2">
+                  <div className="flex flex-col gap-5 items-center justify-center">
+
                   <button
                     className="text-yellow-500 hover:text-yellow-700 mx-2 text-xl"
                     onClick={() => onEdit(movie)}
@@ -93,6 +105,7 @@ function AdminHome() {
                   >
                     <FaTrash />
                   </button>
+                  </div>
                 </td>
               </tr>
             ))}

@@ -9,21 +9,10 @@ import { FaArrowLeft } from "react-icons/fa6";
 
 function AddMovie() {
   const { addMovie } = useMovies();
-  const [poster, setPoster] = useState(null);
-  const [trailer, setTrailer] = useState(null);
-  const [posterError, setPosterError] = useState("");
-  const [trailerError, setTrailerError] = useState("");
   const navigate = useNavigate();
-  const handlePosterChange = (event) => {
-    setPoster(event.currentTarget.files[0]);
-    setPosterError("");
-  };
-  const handleTrailerChange = (event) => {
-    setTrailer(event.currentTarget.files[0]);
-    setTrailerError("");
-  };
+
   return (
-    <div className="common w-full h-screen flex items-center justify-center">
+    <div className="bg-black text-white w-full h-full py-4 flex items-center justify-center">
       <Formik
         initialValues={{
           title: "",
@@ -35,31 +24,24 @@ function AddMovie() {
         }}
         validationSchema={MovieValidation}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          if (!poster || !trailer) {
-            if (!poster) setPosterError("Poster file is required");
-            if (!trailer) setTrailerError("Trailer file is required");
-            setSubmitting(false);
-            return;
-          }
           const movieData = {
             title: values.title,
             cast: values.cast,
             description: values.description,
             rating: values.rating,
-            poster: URL.createObjectURL(poster),
-            trailer: URL.createObjectURL(trailer)
+            poster: values.poster,
+            trailer: values.trailer,
           };
+          console.log("movieData:", movieData);
           addMovie(movieData);
           setSubmitting(false);
           resetForm();
-          setPoster(null);
-          setTrailer(null);
           navigate("/adminHome");
         }}
       >
         {() => (
-          <div className="w-full flex flex-col items-center justify-center">
-            <Form className="flex flex-col gap-3 border-2 border-gray-900 rounded-md px-10 py-1 pb-5">
+          <div className="w-full h-full flex flex-col items-center justify-center">
+            <Form className="flex flex-col gap-4 border-2 border-gray-900 rounded-md px-10 py-1 pb-5">
               <div className="flex items-center justify-center">
                 <img src={Logo} alt="CineMagic Logo" className="h-14" />
                 <h2 className="text-3xl font-semibold font-signature ml-4">
@@ -70,8 +52,8 @@ function AddMovie() {
                 <label htmlFor="title">Movie Title :</label>
                 <Field
                   name="title"
-                  placeholder="movie title"
-                  className="bg-gray-800 pl-1 py-1 rounded-sm placeholder:text-gray-500"
+                  placeholder="Movie title"
+                  className="bg-gray-800 pl-1 py-1 rounded-sm w-96 placeholder:text-gray-500"
                 />
                 <ErrorMessage
                   name="title"
@@ -81,16 +63,16 @@ function AddMovie() {
               </div>
               <div className="flex flex-col gap-1">
                 <label htmlFor="title">Movie Poster :</label>
-                <input
+                <Field
                   name="poster"
-                  type="file"
-                  onChange={handlePosterChange}
-                  className=""
-                  accept="image/*"
+                  placeholder="Poster link"
+                  className="bg-gray-800 pl-1 py-1 rounded-sm placeholder:text-gray-500"
                 />
-                {posterError && (
-                  <div className="text-red-400">{posterError}</div>
-                )}
+                <ErrorMessage
+                  name="poster"
+                  component="div"
+                  className="text-red-400"
+                />
               </div>
               <div className="flex flex-col gap-1">
                 <label htmlFor="title"> Cast :</label>
@@ -135,18 +117,18 @@ function AddMovie() {
               </div>
               <div className="flex flex-col gap-1">
                 <label htmlFor="title">Trailer :</label>
-                <input
+                <Field
                   name="trailer"
-                  type="file"
-                  onChange={handleTrailerChange}
-                  className="file-input"
-                  accept="video/*"
+                  placeholder="Trailer link"
+                  className="bg-gray-800 pl-1 py-1 rounded-sm placeholder:text-gray-500"
                 />
-                {trailerError && (
-                  <div className="text-red-400">{trailerError}</div>
-                )}
+                <ErrorMessage
+                  name="cast"
+                  component="div"
+                  className="text-red-400"
+                />
               </div>
-              <div className="w-full flex items-center justify-center">
+              <div className="w-full flex items-center justify-center mt-2">
                 <Button
                   type="submit"
                   className="bg-[#004c4c] w-36 h-10 hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150"
