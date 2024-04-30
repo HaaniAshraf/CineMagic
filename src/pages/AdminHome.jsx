@@ -21,7 +21,7 @@ function AdminHome() {
     deleteMovie(movieId);
   };
   return (
-    <div className="bg-black text-white min-h-screen pb-24 w-full">
+    <div className="bg-black text-white min-h-screen pb-24">
       <div className="flex justify-between items-center px-5 py-3">
         <div className="flex items-center">
           <img src={Logo} alt="CineMagic Logo" className="h-16" />

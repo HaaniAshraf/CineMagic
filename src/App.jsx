@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import UserHome from "./pages/UserHome";
 import Liked from "./pages/Liked";
 import Profile from "./pages/Profile";
+import MovieDetails from "./pages/MovieDetails";
 import Error from "./components/Error";
 import UserLayout from "./layout/userLayout";
 import AdminHome from "./pages/AdminHome";
@@ -28,6 +29,7 @@ function App() {
               <Route path="/home" element={<UserHome />} />
               <Route path="/liked" element={<Liked />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/movieDetails/:movieId" element={<MovieDetails />} />
             </Route>
             <Route path="/adminHome" element={<AdminHome />} />
             <Route path="/addMovie" element={<AddMovie />} />
