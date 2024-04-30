@@ -31,9 +31,13 @@ const Login = () => {
     const userDetails = getUserDetails(email, password);
     if (userDetails) {
       dispatch(saveUserDetails(userDetails));
-      navigate("/home");
+      if (userDetails.role === "admin") {
+        navigate("/adminHome");
+      } else {
+        navigate("/home");
+      }
     } else {
-      setLoginError("User does not exist. Please Signup.");
+      setLoginError("Incorrect email or password.");
     }
   };
   return (

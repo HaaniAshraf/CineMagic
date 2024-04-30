@@ -20,14 +20,17 @@ function Signup() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // Function to get users from localStorage
   const getUsers = () => {
     const users = localStorage.getItem("users");
     return users ? JSON.parse(users) : [];
   };
+  // Function to check if a user exists
   const userExists = (email) => {
     const users = getUsers();
     return users.some((user) => user.email === email);
   };
+  // Form validation function
   const validate = () => {
     let tempErrors = {};
     tempErrors.name = name ? "" : "Name is required";
@@ -48,10 +51,11 @@ function Signup() {
     // Checking if every element x is an empty string ("").
     return Object.values(tempErrors).every((x) => x === "");
   };
+  // Form submission handler
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      const newUserDetails = { name, email, phone, password };
+      const newUserDetails = { name, email, phone, password,role:'user' };
       const users = getUsers();
       if (userExists(email)) {
         setErrors({ ...errors, email: "Email already exists." });
