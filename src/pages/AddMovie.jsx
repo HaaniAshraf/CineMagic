@@ -13,8 +13,7 @@ function AddMovie() {
     cast: "",
     description: "",
     trailer: "",
-    review:"",
-    rating:""
+    reviews:[],
   };
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {

@@ -42,8 +42,27 @@ export function MovieProvider({ children }) {
       prevMovies.filter((movie) => movie.id !== movieId)
     );
   };
+
+  // Add review
+  const addReview = (movieId, rating, review) => {
+    setMovies((prevMovies) => {
+      const updatedMovies = prevMovies.map((movie) => {
+        if (movie.id === movieId) {
+          const newReview = { rating, review, date: new Date().toISOString() };
+          const updatedReviews = [...movie.reviews, newReview];
+          return { ...movie, reviews: updatedReviews };
+        }
+        return movie;
+      });
+      localStorage.setItem("movies", JSON.stringify(updatedMovies));
+      return updatedMovies;
+    });
+  };
+
   return (
-    <MovieContext.Provider value={{ movies, addMovie, updateMovie, deleteMovie }}>
+    <MovieContext.Provider
+      value={{ movies, addMovie, updateMovie, deleteMovie, addReview }}
+    >
       {children}
     </MovieContext.Provider>
   );
