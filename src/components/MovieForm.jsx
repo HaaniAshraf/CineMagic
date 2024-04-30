@@ -14,7 +14,7 @@ function MovieForm({ initialValues, onSubmit, buttonLabel }) {
       onSubmit={onSubmit}
     >
       {() => (
-        <div className="w-full h-screen py-4 flex flex-col items-center justify-center bg-black text-white">
+        <div className="w-full h-screen py-4 flex flex-col items-center justify-center">
           <Form className="flex flex-col gap-4 border-2 border-gray-900 rounded-md px-10 py-1 pb-5">
             <div className="flex items-center justify-center">
               <img src={Logo} alt="CineMagic Logo" className="h-14" />
@@ -71,20 +71,6 @@ function MovieForm({ initialValues, onSubmit, buttonLabel }) {
               />
               <ErrorMessage
                 name="description"
-                component="div"
-                className="text-red-400"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label htmlFor="title">Rating :</label>
-              <Field
-                name="rating"
-                placeholder="Rating (1-5)"
-                type="number"
-                className="bg-gray-800 pl-1 py-1 rounded-sm placeholder:text-gray-500"
-              />
-              <ErrorMessage
-                name="rating"
                 component="div"
                 className="text-red-400"
               />

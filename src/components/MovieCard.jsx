@@ -1,23 +1,9 @@
 import React from "react";
 import { useMovies } from "../Context/MovieContext";
-import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function MovieCard() {
   const { movies } = useMovies();
-  const renderStars = (rating) => {
-    let stars = [];
-    for (let i = 1; i <= 5; i++) {
-      if (i <= rating) {
-        stars.push(<FaStar key={i} className="text-yellow-400" />);
-      } else if (i - rating < 1) {
-        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
-      } else {
-        stars.push(<FaRegStar key={i} className="text-gray-600" />);
-      }
-    }
-    return stars;
-  };
   return (
     <div className="grid grid-cols-1 px-20 sm:px-12 md:px-0 sm:grid-cols-2 md:grid-cols-5 gap-8 mt-4">
       {movies.map((movie, index) => (
@@ -30,9 +16,6 @@ function MovieCard() {
             <h1 className="text-center font-bold text-2xl mt-2 text-gray-200">
               {movie.title}
             </h1>
-            <div className="text-center mt-3 flex gap-1 text-xl">
-              {renderStars(movie.rating)}
-            </div>
           </div>
         </Link>
       ))}

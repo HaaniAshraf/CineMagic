@@ -20,6 +20,7 @@ function Signup() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   // Function to get users from localStorage
   const getUsers = () => {
     const users = localStorage.getItem("users");
@@ -30,6 +31,7 @@ function Signup() {
     const users = getUsers();
     return users.some((user) => user.email === email);
   };
+  
   // Form validation function
   const validate = () => {
     let tempErrors = {};
@@ -51,11 +53,12 @@ function Signup() {
     // Checking if every element x is an empty string ("").
     return Object.values(tempErrors).every((x) => x === "");
   };
+
   // Form submission handler
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      const newUserDetails = { name, email, phone, password,role:'user' };
+      const newUserDetails = { name, email, phone, password, role: "user" };
       const users = getUsers();
       if (userExists(email)) {
         setErrors({ ...errors, email: "Email already exists." });
@@ -69,7 +72,7 @@ function Signup() {
   };
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center common sm:px-0">
+    <div className="flex items-center justify-center sm:px-0">
       <img src={bgImg} className="absolute h-full w-full object-cover" alt="" />
       <h2 className="text-2xl absolute top-8 text-center font-bold px-3 sm:px-0">
         "Where movies and <span className="text-[#328282]">Magic</span> meet."
@@ -166,7 +169,10 @@ function Signup() {
                 <p className="text-red-400 text-sm">{errors.confirmPassword}</p>
               )}
             </div>
-            <Button type="submit" className="w-full bg-[#004c4c] hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150">
+            <Button
+              type="submit"
+              className="w-full bg-[#004c4c] hover:bg-transparent hover:text-[#306161] hover:border-[#004c4c] hover:border-2 duration-150"
+            >
               Signup
             </Button>
           </form>

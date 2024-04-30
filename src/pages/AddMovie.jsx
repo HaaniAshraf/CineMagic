@@ -12,8 +12,9 @@ function AddMovie() {
     poster: "",
     cast: "",
     description: "",
-    rating: "",
     trailer: "",
+    review:"",
+    rating:""
   };
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {

@@ -2,10 +2,9 @@ import React from "react";
 import Logo from "../assets/logo.png";
 import { IoSearch } from "react-icons/io5";
 import { HiHome } from "react-icons/hi2";
-import { IoMdHeartEmpty } from "react-icons/io";
 import { FaCircleUser } from "react-icons/fa6";
 import Button from "./Button";
-import { Link,useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
@@ -34,18 +33,11 @@ function Header() {
       <ul className="sm:flex hidden items-center md:gap-8 sm:gap-4">
         <Link to={"/home"}>
           <li
-            className={location.pathname === "/home" ? "active-link" : "nav-item"}
-          >
-            <HiHome />
-          </li>
-        </Link>
-        <Link to={"/liked"}>
-          <li
             className={
-              location.pathname === "/liked" ? "active-link" : "nav-item"
+              location.pathname === "/home" ? "active-link" : "nav-item"
             }
           >
-            <IoMdHeartEmpty />
+            <HiHome />
           </li>
         </Link>
         <Link to={"/profile"}>
@@ -77,15 +69,6 @@ function Header() {
                 className=" hover:text-[#3e9e9e] font-semibold text-xl"
               >
                 Home
-              </Link>
-            </li>
-            <li className="my-2">
-              <Link
-                to={"/liked"}
-                onClick={closeNav}
-                className=" hover:text-[#3e9e9e] font-semibold text-xl"
-              >
-                Liked
               </Link>
             </li>
             <li className="my-2">

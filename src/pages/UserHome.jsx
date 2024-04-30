@@ -10,7 +10,7 @@ function UserHome() {
     .fill(0)
     .map((_, index) => <FaStar key={index} className="text-yellow-400" />);
   return (
-    <div className="flex flex-col bg-black text-white">
+    <div className="flex flex-col">
       <div className="w-full common flex flex-col items-center justify-center">
         <img
           src={bgImg}

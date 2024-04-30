@@ -10,7 +10,7 @@ export default {
       signature:['Dynalight']
     },
     boxShadow: {
-      customShadow: '-10px -12px 15px 8px #ffffff',
+      customShadow: '-10px -12px 12px 8px #ffffff',
     },
   },
   plugins: [],

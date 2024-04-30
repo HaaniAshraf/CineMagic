@@ -13,14 +13,15 @@ function EditMovie() {
     poster: movie?.poster || "",
     cast: movie?.cast || "",
     description: movie?.description || "",
-    rating: movie?.rating || "",
     trailer: movie?.trailer || "",
   };
+
   const handleSubmit = (values, { setSubmitting }) => {
     updateMovie(movieId, values);
     setSubmitting(false);
     navigate("/adminHome");
   };
+  
   return (
     <div className="movie-form-container">
       <MovieForm

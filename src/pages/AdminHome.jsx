@@ -20,9 +20,10 @@ function AdminHome() {
   const handleDelete = (movieId) => {
     deleteMovie(movieId);
   };
+  
   return (
-    <div className="bg-black text-white min-h-screen pb-24">
-      <div className="flex justify-between items-center px-5 py-3">
+    <div className="pb-24">
+      <div className="flex justify-between h-full w-full items-center px-5 py-3">
         <div className="flex items-center">
           <img src={Logo} alt="CineMagic Logo" className="h-16" />
           <h2 className="text-3xl font-semibold font-signature ml-4">
@@ -52,7 +53,6 @@ function AdminHome() {
               <th className="px-4 py-2">Poster</th>
               <th className="px-4 py-2">Description</th>
               <th className="px-4 py-2">Cast</th>
-              <th className="px-4 py-2">Rating</th>
               <th className="px-4 py-2">Trailer</th>
               <th className="px-4 py-2">Actions</th>
             </tr>
@@ -75,9 +75,6 @@ function AdminHome() {
                 </td>
                 <td className="border border-gray-800 px-4 py-2">
                   {movie.cast}
-                </td>
-                <td className="border border-gray-800 px-4 py-2">
-                  {movie.rating}
                 </td>
                 <td className="border border-gray-800 px-4 py-2">
                   <YouTube

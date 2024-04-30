@@ -6,7 +6,6 @@ import Store from "./redux/store";
 import Login from "./pages/login";
 import Signup from "./pages/Signup";
 import UserHome from "./pages/UserHome";
-import Liked from "./pages/Liked";
 import Profile from "./pages/Profile";
 import MovieDetails from "./pages/MovieDetails";
 import Error from "./components/Error";
@@ -27,7 +26,6 @@ function App() {
             <Route path="/" element={<UserLayout />}>
               <Route path="*" element={<Error />} />
               <Route path="/home" element={<UserHome />} />
-              <Route path="/liked" element={<Liked />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/movieDetails/:movieId" element={<MovieDetails />} />
             </Route>
