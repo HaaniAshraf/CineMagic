@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import Button from "../components/Button";
 import { LuPlusCircle } from "react-icons/lu";
@@ -9,6 +9,17 @@ import YouTube from "react-youtube";
 
 function AdminHome() {
   const { movies, deleteMovie } = useMovies();
+
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const moviesPerPage = 4;
+  const lastMovieIndex = currentPage * moviesPerPage;
+  const firstMovieIndex = lastMovieIndex - moviesPerPage;
+  const currentMovies = movies.slice(firstMovieIndex, lastMovieIndex);
+  const handlePageChange = (pageNum) => {
+    setCurrentPage(pageNum);
+  };
+
   // Function to extract YouTube ID from URL
   const getYouTubeId = (url) => {
     const regExp =
@@ -20,7 +31,7 @@ function AdminHome() {
   const handleDelete = (movieId) => {
     deleteMovie(movieId);
   };
-  
+
   return (
     <div className="pb-24">
       <div className="flex justify-between h-full w-full items-center px-5 py-3">
@@ -58,7 +69,7 @@ function AdminHome() {
             </tr>
           </thead>
           <tbody>
-            {movies.map((movie, index) => (
+            {currentMovies.map((movie, index) => (
               <tr key={index} className="text-center">
                 <td className="border border-gray-800 px-4 py-2">
                   {movie.title}
@@ -105,6 +116,44 @@ function AdminHome() {
             ))}
           </tbody>
         </table>
+        <div className="flex justify-center mt-10">
+          {currentPage > 1 && (
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              className="mx-2 px-3 py-1 rounded bg-gray-950 hover:bg-gray-900 text-[#3b9292] font-medium"
+            >
+              Prev
+            </button>
+          )}
+          {Array.from(
+            { length: Math.ceil(movies.length / moviesPerPage) },
+            (_, i) => (
+              <button
+                key={i + 1}
+                onClick={() => handlePageChange(i + 1)}
+                className={`mx-2 px-3 py-1 rounded ${
+                  currentPage === i + 1
+                    ? "bg-[#328282] text-white font-medium"
+                    : "bg-gray-900 text-[#3b9292] font-medium hover:bg-gray-950"
+                }`}
+              >
+                {i + 1}
+              </button>
+            )
+          )}
+          {currentPage < Math.ceil(movies.length / moviesPerPage) && (
+            <button
+              onClick={() =>
+                setCurrentPage((prev) =>
+                  Math.min(prev + 1, Math.ceil(movies.length / moviesPerPage))
+                )
+              }
+              className="mx-2 px-3 py-1 rounded bg-gray-950 hover:bg-gray-900 text-[#3b9292] font-medium"
+            >
+              Next
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
