@@ -2,12 +2,12 @@
 export const loadState = () => {
   try {
     // Retrieve the item from localStorage
-    const serializedState = localStorage.getItem("state");
-    if (serializedState === null) {
+    const getState = localStorage.getItem("state");
+    if (getState === null) {
       return undefined;
     }
     // Parse the JSON string back into JavaScript object and return it
-    return JSON.parse(serializedState);
+    return JSON.parse(getState);
   } catch (err) {
     return undefined;
   }
@@ -17,9 +17,9 @@ export const loadState = () => {
 export const saveState = (state) => {
   try {
     // Convert the state into a JSON string
-    const serializedState = JSON.stringify(state);
-    // Save the serialized state to localStorage under the key "state"
-    localStorage.setItem("state", serializedState);
+    const convertedState = JSON.stringify(state);
+    // Save the converted state to localStorage under the key "state"
+    localStorage.setItem("state", convertedState);
   } catch (err) {
     console.error("Failed to save state:", err);
   }

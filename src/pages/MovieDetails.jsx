@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMovies } from "../Context/MovieContext";
 import YouTube from "react-youtube";
-import { FaStar, FaRegStar } from "react-icons/fa";
+import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import Button from "../components/Button";
 
 function MovieDetails() {
@@ -33,6 +33,27 @@ function MovieDetails() {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
+  const renderStars = (rating) => {
+    let stars = [];
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5 ? true : false;
+    for (let i = 1; i <= 5; i++) {
+      if (i <= fullStars) {
+        stars.push(<FaStar key={i} className="text-yellow-400" />);
+      } else if (i === fullStars + 1 && halfStar) {
+        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
+      } else {
+        stars.push(<FaRegStar key={i} className="text-gray-400" />);
+      }
+    }
+    return stars;
+  };
+  const avgRating = (reviews) => {
+    if (!reviews || reviews.length === 0) return 0;
+    const total = reviews.reduce((acc, review) => acc + review.rating, 0);
+    return total / reviews.length;
+  };
+
   const stars = (rating) => {
     return [...Array(5)].map((_, index) => {
       return index < Math.floor(rating) ? (
@@ -44,7 +65,7 @@ function MovieDetails() {
   };
 
   return (
-    <div className="flex flex-col px-5 sm:px-10 pt-32 pb-40 gap-10">
+    <div className="flex flex-col px-5 sm:px-10 pt-32 pb-40 gap-8">
       <div className="flex gap-20">
         <div className="w-full md:w-1/2">
           <YouTube
@@ -59,6 +80,7 @@ function MovieDetails() {
         <div className="flex flex-col items-center gap-8 justify-center">
           <h1 className="mt-2 text-3xl font-bold">{movie.title}</h1>
           <h2 className="text-[#41adad] font-medium">Cast: {movie.cast}</h2>
+          <div className="flex gap-1 mt-2 text-lg">{renderStars(avgRating(movie.reviews))}</div>
           <p className="text-gray-400 leading-7">{movie.description}</p>
           <div className="flex justify-center gap-2 mt-2">
             <p>Rate and review :</p>
@@ -100,16 +122,18 @@ function MovieDetails() {
           </div>
         </div>
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-5">
         <h2>User Reviews :</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="px-24 sm:px-0 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-5 md:gap-10">
           {movie?.reviews.map((rev, index) => (
             <div
               key={index}
-              className="border-2 p-4 rounded-md border-gray-900 flex flex-col"
+              className="border-2 p-2 rounded-md border-gray-900 flex justify-between"
             >
-              <div className="flex gap-1">{stars(rev.rating)}</div>
-              <p className="text-[#41adad] font-medium">{rev.review}</p>
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-1">{stars(rev.rating)}</div>
+                <p className="text-[#41adad] font-medium">{rev.review}</p>
+              </div>
               <p className="text-gray-500">{formatDate(rev.date)}</p>
             </div>
           ))}

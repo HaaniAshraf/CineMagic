@@ -7,12 +7,22 @@ import Button from "./Button";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useMovies } from "../Context/MovieContext";
+import { debounce } from "lodash";
 
 function Header() {
   const location = useLocation();
   const [nav, setNav] = useState(false);
+  const { setSearchTerm } = useMovies();
+  const [input, setInput] = useState("");
   const closeNav = () => {
     setNav(false);
+  };
+  const debouncedSearchTerm = debounce(setSearchTerm, 300);
+  const handleSearch = (event) => {
+    const { value } = event.target;
+    setInput(value);
+    debouncedSearchTerm(value);
   };
   return (
     <div className="common shadow-customShadow h-20 z-50 flex justify-between px-7 items-center fixed border-b-2 border-gray-700">
@@ -27,6 +37,8 @@ function Header() {
           type="text"
           className="w-full sm:w-full sm:ml pl-2 h-full rounded-md bg-gray-800 placeholder-pl-2 placeholder-ml-2"
           placeholder="Search"
+          value={input}
+          onChange={handleSearch}
         />
         <IoSearch className="cursor-pointer absolute inset-y-0 right-2 sm:right-1 md:right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#328282]" />
       </div>
