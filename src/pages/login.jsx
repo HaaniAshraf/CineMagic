@@ -16,7 +16,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
+
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
   const getUserDetails = (email, password) => {
@@ -42,9 +42,18 @@ const Login = () => {
     }
   };
   return (
-    <div className="h-screen w-screen flex items-center justify-center common">
-      <img src={BgImg} alt="" className="absolute h-full w-full object-cover" />
-      <h2 className="text-2xl absolute top-12 text-center font-bold">
+    <div
+      className="flex flex-col gap-12 items-center justify-center"
+      style={{
+        backgroundImage: `url(${BgImg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+        height: "100vh",
+      }}
+    >
+      <h2 className="text-2xl text-center font-bold">
         Ready to explore the <span className="text-[#328282]">Magic</span> of
         movies?
         <br />

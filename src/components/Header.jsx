@@ -3,18 +3,24 @@ import Logo from "../assets/logo.png";
 import { IoSearch } from "react-icons/io5";
 import { HiHome } from "react-icons/hi2";
 import { FaCircleUser } from "react-icons/fa6";
-import Button from "./Button";
+import { MdLogout } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useMovies } from "../Context/MovieContext";
 import { debounce } from "lodash";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../redux/reducers/userReducer";
 
 function Header() {
   const location = useLocation();
   const [nav, setNav] = useState(false);
   const { setSearchTerm } = useMovies();
   const [input, setInput] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
   const closeNav = () => {
     setNav(false);
   };
@@ -23,6 +29,10 @@ function Header() {
     const { value } = event.target;
     setInput(value);
     debouncedSearchTerm(value);
+  };
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/");
   };
   return (
     <div className="common shadow-customShadow h-20 z-50 flex justify-between px-7 items-center fixed border-b-2 border-gray-700">
@@ -61,9 +71,12 @@ function Header() {
             <FaCircleUser />
           </li>
         </Link>
-        <Button className="bg-[#2e7878] p-1 sm:text-sm md:text-base hover:bg-[#2a6868]">
-          Subscribe
-        </Button>
+        <button
+          onClick={handleLogout}
+          className=" text-red-400 sm:text-xl md:text-2xl"
+        >
+          <MdLogout />
+        </button>
       </ul>
       <div className="sm:hidden">
         <button
@@ -94,9 +107,7 @@ function Header() {
             </li>
 
             <li className="my-2">
-              <Button className="bg-[#2e7878] p-1 sm:text-sm md:text-base hover:bg-[#2a6868]">
-                Subscribe
-              </Button>
+              <button className="text-red-400 text-xl">Logout</button>
             </li>
           </ul>
         )}

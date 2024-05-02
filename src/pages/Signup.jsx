@@ -20,7 +20,7 @@ function Signup() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   // Function to get users from localStorage
   const getUsers = () => {
     const users = localStorage.getItem("users");
@@ -31,7 +31,7 @@ function Signup() {
     const users = getUsers();
     return users.some((user) => user.email === email);
   };
-  
+
   // Form validation function
   const validate = () => {
     let tempErrors = {};
@@ -72,9 +72,18 @@ function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center sm:px-0">
-      <img src={bgImg} className="absolute h-full w-full object-cover" alt="" />
-      <h2 className="text-2xl absolute top-8 text-center font-bold px-3 sm:px-0">
+    <div
+      className="flex flex-col items-center justify-center"
+      style={{
+        backgroundImage: `url(${bgImg})`, 
+        backgroundSize: "cover", 
+        backgroundPosition: "center", 
+        backgroundRepeat: "no-repeat", 
+        width: "100%", 
+        height: "100vh",
+      }}
+    >
+      <h2 className="text-2xl text-center font-bold px-3 sm:px-0">
         "Where movies and <span className="text-[#328282]">Magic</span> meet."
         <br />
         <span className="text-lg text-gray-400">
@@ -82,7 +91,7 @@ function Signup() {
           today!
         </span>
       </h2>
-      <div className="z-10 mt-28 sm:mt-20 relative bg-[#05050599] py-4 px-14 pb-8 rounded-lg">
+      <div className="z-10 mt-8 relative bg-[#05050599] py-4 px-14 pb-8 rounded-lg">
         <div className="flex flex-col items-center">
           <div className="flex items-center justify-center">
             <img src={Logo} alt="CineMagic Logo" className="h-20" />

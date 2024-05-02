@@ -9,8 +9,11 @@ const userSlice = createSlice({
       const { confirmPassword, ...userData } = action.payload;
       state.userDetails = userData;
     },
+    logoutUser: (state) => {
+      state.userDetails = null;
+    },
   },
 });
 
-export const { saveUserDetails } = userSlice.actions;
+export const { saveUserDetails, logoutUser } = userSlice.actions;
 export default userSlice.reducer;
