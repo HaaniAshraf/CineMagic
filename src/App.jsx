@@ -23,7 +23,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route element={<ProtectedRoute />}>
+            <Route
+              element={<ProtectedRoute allowedRoles={["user", "admin"]} />}
+            >
               <Route element={<UserLayout />}>
                 <Route path="/home" element={<UserHome />} />
                 <Route path="/profile" element={<Profile />} />
@@ -32,6 +34,8 @@ function App() {
                   element={<MovieDetails />}
                 />
               </Route>
+            </Route>
+            <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
               <Route path="/adminHome" element={<AdminHome />} />
               <Route path="/addMovie" element={<AddMovie />} />
               <Route path="/editMovie/:movieId" element={<EditMovie />} />

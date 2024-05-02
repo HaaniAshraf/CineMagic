@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import bgImg from "../assets/banners/oppen.jpeg";
 import { FaStar } from "react-icons/fa6";
 import Button from "../components/Button";
@@ -8,6 +8,26 @@ import { useMovies } from "../Context/MovieContext";
 
 function UserHome() {
   const { movies } = useMovies();
+  const [filtermovies, setFilterMovies] = useState([]);
+
+  const avgRating = (reviews) => {
+    if (!reviews.length) return 0;
+    const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
+    return reviews.length > 0 ? totalRating / reviews.length : 0;
+  };
+  useEffect(() => {
+    const ratedMovies = movies.map((movie) => ({
+      ...movie,
+      avgRating: avgRating(movie.reviews),
+    }));
+    setFilterMovies(ratedMovies);
+  }, [movies]);
+  const handleFilter = (ratingCondition) => {
+    setFilterMovies(
+      movies.filter((movie) => ratingCondition(avgRating(movie.reviews)))
+    );
+  };
+
   const stars = Array(5)
     .fill(0)
     .map((_, index) => <FaStar key={index} className="text-yellow-400" />);
@@ -49,11 +69,32 @@ function UserHome() {
         </div>
       </div>
       <div className="md:px-20 pb-40 px-6 sm:px-10 flex flex-col gap-5">
-        <h2 className="font-bold text-3xl md:w-1/6 w-1/2 sm:w-1/3 text-center border-b-4 border-gray-900 pb-2">
-          Popular Shows
-        </h2>
+        <h2 className="font-bold text-3xl">Trending Shows</h2>
+        <div className="flex items-center gap-7 mt-4">
+          <Button
+            onClick={() => handleFilter((rating) => rating === 5)}
+            className="filter-button"
+          >
+            <span>5</span>
+            <FaStar />
+          </Button>
+          <Button
+            onClick={() => handleFilter((rating) => rating > 3)}
+            className="filter-button"
+          >
+            <span>Above 3</span>
+            <FaStar />
+          </Button>
+          <Button
+            onClick={() => handleFilter((rating) => rating < 3)}
+            className="filter-button"
+          >
+            <span>Below 3</span>
+            <FaStar />
+          </Button>
+        </div>
         <div className="grid grid-cols-1 px-20 sm:px-12 md:px-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mt-4">
-          {movies.map((movie) => (
+          {filtermovies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>

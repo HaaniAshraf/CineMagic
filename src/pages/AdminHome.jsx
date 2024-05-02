@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import Button from "../components/Button";
+import { MdLogout } from "react-icons/md";
 import { LuPlusCircle } from "react-icons/lu";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useMovies } from "../Context/MovieContext";
 import YouTube from "react-youtube";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../redux/reducers/userReducer";
 
 function AdminHome() {
   const { movies, deleteMovie } = useMovies();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/");
+  };
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,7 +53,12 @@ function AdminHome() {
           </h2>
         </div>
         <div>
-          <h2 className="text-[#3c9b9b] text-xl font-semibold">Hey, Admin</h2>
+          <button
+            onClick={handleLogout}
+            className=" text-red-400 flex items-center gap-2 text-xl"
+          ><span>Logout</span>
+            <MdLogout />
+          </button>{" "}
         </div>
       </div>
       <div className="w-full flex items-end justify-end px-5">

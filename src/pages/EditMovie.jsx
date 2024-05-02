@@ -16,12 +16,11 @@ function EditMovie() {
     trailer: movie?.trailer || "",
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = (values) => {
     updateMovie(movieId, values);
-    setSubmitting(false);
     navigate("/adminHome");
   };
-  
+
   return (
     <div className="movie-form-container">
       <MovieForm

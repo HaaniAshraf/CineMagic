@@ -13,13 +13,11 @@ function AddMovie() {
     cast: "",
     description: "",
     trailer: "",
-    reviews:[],
+    reviews: [],
   };
 
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+  const handleSubmit = (values) => {
     addMovie(values);
-    setSubmitting(false);
-    resetForm();
     navigate("/adminHome");
   };
 
