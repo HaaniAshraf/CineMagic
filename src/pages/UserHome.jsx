@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import bgImg from "../assets/banners/oppen.jpeg";
 import { FaStar } from "react-icons/fa6";
 import Button from "../components/Button";
 import { FaPlay, FaRupeeSign } from "react-icons/fa";
+import { VscDebugRestart } from "react-icons/vsc";
 import MovieCard from "../components/MovieCard";
 import { useMovies } from "../Context/MovieContext";
 
@@ -10,22 +11,32 @@ function UserHome() {
   const { movies } = useMovies();
   const [filtermovies, setFilterMovies] = useState([]);
 
-  const avgRating = (reviews) => {
-    if (!reviews.length) return 0;
-    const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
-    return reviews.length > 0 ? totalRating / reviews.length : 0;
-  };
+  const avgRating = useMemo(
+    () => (reviews) => {
+      if (!reviews.length) return 0;
+      const totalRating = reviews.reduce(
+        (acc, review) => acc + review.rating,
+        0
+      );
+      return reviews.length > 0 ? totalRating / reviews.length : 0;
+    },
+    []
+  );
   useEffect(() => {
     const ratedMovies = movies.map((movie) => ({
       ...movie,
       avgRating: avgRating(movie.reviews),
     }));
     setFilterMovies(ratedMovies);
-  }, [movies]);
+  }, [movies,avgRating]);
+
   const handleFilter = (ratingCondition) => {
     setFilterMovies(
       movies.filter((movie) => ratingCondition(avgRating(movie.reviews)))
     );
+  };
+  const handleReset = () => {
+    setFilterMovies(movies);
   };
 
   const stars = Array(5)
@@ -91,6 +102,10 @@ function UserHome() {
           >
             <span>Below 3</span>
             <FaStar />
+          </Button>
+          <Button onClick={handleReset} className="filter-button">
+            <span>Reset</span>
+            <VscDebugRestart />
           </Button>
         </div>
         <div className="grid grid-cols-1 px-20 sm:px-12 md:px-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mt-4">

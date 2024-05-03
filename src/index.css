@@ -30,3 +30,31 @@ body{
     background-color: black; 
     color: white;
 }
+
+
+.swal2-popup {
+    background-color: #030712 !important;
+}
+
+.swal2-title {
+    color: #fff !important;
+}
+.swal2-icon{
+    color: rgb(234, 72, 72) !important;
+}
+.swal2-icon.swal2-warning{
+    border-color: rgb(234, 72, 72) !important;
+}
+#swal2-content{
+    color: rgb(139, 139, 139) !important;
+}
+
+.swal2-confirm-button {
+    background-color: #328282 !important;
+    color: #fff !important;
+}
+
+.swal2-cancel-button {
+    background-color: #d33 !important;
+    color: #fff !important;
+}

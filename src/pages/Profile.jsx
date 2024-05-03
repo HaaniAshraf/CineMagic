@@ -5,13 +5,13 @@ function Profile() {
   const userDetails = useSelector((store) => store.user.userDetails);
   if (!userDetails) {
     return (
-      <div className="pt-28 common sm:text-3xl text-2xl font-bold text-center">
+      <div className="pt-28 h-full sm:text-3xl text-2xl font-bold text-center">
         Loading...
       </div>
     );
   }
   return (
-    <div className="common flex flex-col items-center pt-28">
+    <div className="flex h-screen flex-col items-center pt-28">
       <h2 className="sm:text-3xl text-2xl font-bold mb-4 text-center text-gray-300">
         Profile
       </h2>

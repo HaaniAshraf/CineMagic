@@ -30,7 +30,6 @@ export function MovieProvider({ children }) {
     setMovies((prevMovies) => {
       return prevMovies.map((movie) => {
         if (movie.id === movieId) {
-          // Ensure that reviews are not overwritten by including them from the existing movie
           const reviews = updatedMovieData.reviews || movie.reviews;
           return { ...movie, ...updatedMovieData, reviews };
         }

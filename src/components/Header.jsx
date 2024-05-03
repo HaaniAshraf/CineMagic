@@ -12,6 +12,7 @@ import { debounce } from "lodash";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/reducers/userReducer";
+import Swal from "sweetalert2";
 
 function Header() {
   const location = useLocation();
@@ -20,7 +21,7 @@ function Header() {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const closeNav = () => {
     setNav(false);
   };
@@ -31,8 +32,31 @@ function Header() {
     debouncedSearchTerm(value);
   };
   const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate("/");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out of your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out",
+      cancelButtonText: "Cancel",
+      backdrop: "rgba(0,0,0,0.9)",
+      customClass: {
+        container: "custom-swal-container",
+        popup: "custom-swal-popup",
+        title: "custom-swal-title",
+        text: "custom-swal-text",
+        confirmButton: "custom-swal-confirm-button",
+        cancelButton: "custom-swal-cancel-button",
+        backdrop: "rgba(0,0,0,0.9)",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(logoutUser());
+        navigate("/");
+      }
+    });
   };
   return (
     <div className="common shadow-customShadow h-20 z-50 flex justify-between px-7 items-center fixed border-b-2 border-gray-700">

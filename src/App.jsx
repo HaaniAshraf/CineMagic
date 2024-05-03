@@ -14,12 +14,14 @@ import AddMovie from "./pages/AddMovie";
 import EditMovie from "./pages/EditMovie";
 import { MovieProvider } from "./Context/MovieContext";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import ScrollToTop from "./components/Scroll";
 
 function App() {
   return (
     <Provider store={Store}>
       <BrowserRouter>
         <MovieProvider>
+          <ScrollToTop/>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

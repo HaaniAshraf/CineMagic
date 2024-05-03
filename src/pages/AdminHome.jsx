@@ -10,6 +10,7 @@ import YouTube from "react-youtube";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/reducers/userReducer";
+import Swal from "sweetalert2";
 
 function AdminHome() {
   const { movies, deleteMovie } = useMovies();
@@ -17,8 +18,31 @@ function AdminHome() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate("/");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out of your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out",
+      cancelButtonText: "Cancel",
+      backdrop: "rgba(0,0,0,0.9)",
+      customClass: {
+        container: "custom-swal-container",
+        popup: "custom-swal-popup",
+        title: "custom-swal-title",
+        text: "custom-swal-text",
+        confirmButton: "custom-swal-confirm-button",
+        cancelButton: "custom-swal-cancel-button",
+        backdrop: "rgba(0,0,0,0.9)",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(logoutUser());
+        navigate("/");
+      }
+    });
   };
 
   // Pagination
@@ -40,7 +64,30 @@ function AdminHome() {
   };
 
   const handleDelete = (movieId) => {
-    deleteMovie(movieId);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This movie will be deleted!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete it!",
+      cancelButtonText: "Cancel",
+      backdrop: "rgba(0,0,0,0.9)",
+      customClass: {
+        container: "custom-swal-container",
+        popup: "custom-swal-popup",
+        title: "custom-swal-title",
+        text: "custom-swal-text",
+        confirmButton: "custom-swal-confirm-button",
+        cancelButton: "custom-swal-cancel-button",
+        backdrop: "rgba(0,0,0,0.9)",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteMovie(movieId);
+      }
+    });
   };
 
   return (
@@ -56,7 +103,8 @@ function AdminHome() {
           <button
             onClick={handleLogout}
             className=" text-red-400 flex items-center gap-2 text-xl"
-          ><span>Logout</span>
+          >
+            <span>Logout</span>
             <MdLogout />
           </button>{" "}
         </div>

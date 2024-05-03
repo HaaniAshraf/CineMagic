@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useMovies } from "../Context/MovieContext";
 import YouTube from "react-youtube";
@@ -20,14 +20,17 @@ function MovieDetails() {
   };
 
   const movie = movies.find((m) => m.id === movieId);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (reviewText != "" || undefined) {
-      addReview(movieId, rating, reviewText);
-    }
-    setReviewText("");
-    setRating(0);
-  };
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (reviewText != "" || undefined) {
+        addReview(movieId, rating, reviewText);
+      }
+      setReviewText("");
+      setRating(0);
+    },
+    [movieId, rating, reviewText, addReview]
+  );
 
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
@@ -66,23 +69,25 @@ function MovieDetails() {
 
   return (
     <div className="flex flex-col px-5 sm:px-10 pt-32 pb-40 gap-8">
-      <div className="flex gap-20">
-        <div className="w-full md:w-1/2">
+      <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 ">
+        <div className="w-full">
           <YouTube
             videoId={getYouTubeId(movie.trailer)}
             opts={{
               height: "500",
-              width: "750",
+              width: "100%",
               playerVars: { mute: 1 },
             }}
           />
         </div>
-        <div className="flex flex-col items-center gap-8 justify-center">
+        <div className="flex flex-col items-center gap-5 justify-center lg:w-2/3">
           <h1 className="mt-2 text-3xl font-bold">{movie.title}</h1>
           <h2 className="text-[#41adad] font-medium">Cast: {movie.cast}</h2>
-          <div className="flex gap-1 mt-2 text-lg">{renderStars(avgRating(movie.reviews))}</div>
+          <div className="flex gap-1 text-lg">
+            {renderStars(avgRating(movie.reviews))}
+          </div>
           <p className="text-gray-400 leading-7">{movie.description}</p>
-          <div className="flex justify-center gap-2 mt-2">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 mt-2">
             <p>Rate and review :</p>
             <form
               onSubmit={handleSubmit}
@@ -124,11 +129,11 @@ function MovieDetails() {
       </div>
       <div className="flex flex-col gap-5">
         <h2>User Reviews :</h2>
-        <div className="px-24 sm:px-0 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-5 md:gap-10">
+        <div className="px-10 sm:px-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-10">
           {movie?.reviews.map((rev, index) => (
             <div
               key={index}
-              className="border-2 p-2 rounded-md border-gray-900 flex justify-between"
+              className="border-2 p-2 rounded-md border-gray-900 flex gap-5 justify-between"
             >
               <div className="flex flex-col gap-2">
                 <div className="flex gap-1">{stars(rev.rating)}</div>
