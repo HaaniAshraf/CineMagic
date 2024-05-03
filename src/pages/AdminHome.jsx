@@ -91,8 +91,8 @@ function AdminHome() {
   };
 
   return (
-    <div className="pb-24">
-      <div className="flex justify-between h-full w-full items-center px-5 py-3">
+    <div className="pb-24 xxs:w-[235%] md:w-full">
+      <div className="flex justify-between items-center xs:px-7 px-5 py-3">
         <div className="flex items-center">
           <img src={Logo} alt="CineMagic Logo" className="h-16" />
           <h2 className="text-3xl font-semibold font-signature ml-4">

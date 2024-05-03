@@ -59,14 +59,14 @@ function Header() {
     });
   };
   return (
-    <div className="common shadow-customShadow h-20 z-50 flex justify-between px-7 items-center fixed border-b-2 border-gray-700">
+    <div className="bg-black shadow-customShadow h-20 z-50 flex xxs:gap-3 sm:px-2 md:w-full md:px-5 gap-5 justify-between items-center fixed">
       <div className="flex items-center justify-center">
         <img src={Logo} alt="CineMagic Logo" className="h-10" />
         <h2 className="text-2xl font-semibold font-signature ml-4">
           CineMagic
         </h2>
       </div>
-      <div className="w-1/2 sm:w-1/3 md:w-1/3 relative h-9">
+      <div className="w-1/2 xxs:w-1/3 sm:w-1/3 md:w-1/3 relative h-9">
         <input
           type="text"
           className="w-full sm:w-full sm:ml pl-2 h-full rounded-md bg-gray-800 placeholder-pl-2 placeholder-ml-2"

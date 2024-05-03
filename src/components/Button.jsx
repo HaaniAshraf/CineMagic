@@ -5,7 +5,7 @@ function Button({ children, onClick, className, type = "button" }) {
     <button
       type={type}
       onClick={onClick}
-      className={`py-2 px-4 rounded-md font-bold ${className}`}
+      className={`xxs:py-1 rounded-md font-bold ${className}`}
     >
       {children}
     </button>

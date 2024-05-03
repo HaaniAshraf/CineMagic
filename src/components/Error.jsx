@@ -9,7 +9,7 @@ const Error = () => {
     }
 
   return (
-    <div className="flex common flex-col h-screen w-full">
+    <div className="flex flex-col h-screen w-full">
       <div className="flex-grow flex justify-center items-center pb-40">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4 text-[#3d9e9e]">Oops!!</h1>

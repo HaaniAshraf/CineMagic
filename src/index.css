@@ -4,9 +4,6 @@
 @tailwind utilities;
 
 @layer components{
-    .common{
-        @apply bg-black text-white h-screen w-screen
-    }
     .active-link {
         @apply border-b-2 pb-1 border-[#3e9e9e] duration-200 text-[#3e9e9e] md:text-xl
     }
@@ -14,7 +11,7 @@
         @apply cursor-pointer hover:text-[#3e9e9e] duration-100 md:text-2xl flex flex-col items-center justify-center;
     }
     .filter-button{
-        @apply flex gap-1 items-center bg-gray-900 hover:bg-gray-950 border-2 border-[#358181] text-[#47a4a4]
+        @apply flex xxs:text-sm md:text-base px-1 sm:px-2 md:px-5 items-center bg-gray-900 hover:bg-gray-950 border-2 border-[#358181] text-[#47a4a4]
     }
 }
 

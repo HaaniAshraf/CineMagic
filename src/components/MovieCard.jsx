@@ -28,12 +28,12 @@ const MovieCard = React.memo(({ movie }) => {
   return (
     <div>
       <Link to={`/movieDetails/${movie.id}`}>
-        <div className="border-gray-900 border-2 flex h-96 flex-col items-center cursor-pointer rounded-md p-1 hover:scale-105 duration-150 pb-5 hover:border-2 hover:border-[#2f7575]">
-          <img src={movie.poster} className="h-64 w-full" />
-          <h1 className="text-center font-bold text-2xl mt-2 text-gray-200">
+        <div className="border-gray-900 border-2 flex xxs:h-80 lg:h-96 h-96 flex-col items-center cursor-pointer rounded-md p-1 hover:scale-105 duration-150 hover:border-2 hover:border-[#2f7575]">
+          <img src={movie.poster} className="h-64 xxs:h-56 lg:h-64 w-full" />
+          <h1 className="text-center font-bold xxs:text-base lg:text-xl mt-2 text-gray-200">
             {movie.title}
           </h1>
-          <div className="flex gap-1 mt-2 text-lg">
+          <div className="flex gap-1 mt-2 xxs:text-base lg:text-lg lg:mt-5 text-lg">
             {renderStars(avgRating(movie.reviews))}
           </div>
         </div>
