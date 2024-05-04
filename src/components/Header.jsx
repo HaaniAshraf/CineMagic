@@ -59,7 +59,7 @@ function Header() {
     });
   };
   return (
-    <div className="bg-black shadow-customShadow h-20 z-50 flex xxs:gap-3 sm:px-2 md:w-full md:px-5 gap-5 justify-between items-center fixed">
+    <div className="bg-black shadow-customShadow h-20 z-50 flex xxs:gap-3 sm:px-2 sm:w-full md:w-full md:px-5 gap-5 justify-between items-center fixed">
       <div className="flex items-center justify-center">
         <img src={Logo} alt="CineMagic Logo" className="h-10" />
         <h2 className="text-2xl font-semibold font-signature ml-4">

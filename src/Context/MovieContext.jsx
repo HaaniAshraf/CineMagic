@@ -20,6 +20,7 @@ export function MovieProvider({ children }) {
     const newMovie = {
       ...movie,
       reviews: movie.reviews || [],
+      
       id: new Date().toISOString(),
     };
     setMovies((prevMovies) => [...prevMovies, newMovie]);
