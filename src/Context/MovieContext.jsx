@@ -9,6 +9,7 @@ export function MovieProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("movies", JSON.stringify(movies));
   }, [movies]);
+  
   // Movie search
   const [searchTerm, setSearchTerm] = useState("");
   const searchedMovies = movies.filter((movie) =>
@@ -20,9 +21,9 @@ export function MovieProvider({ children }) {
     const newMovie = {
       ...movie,
       reviews: movie.reviews || [],
-      
       id: new Date().toISOString(),
     };
+    // Add the new movie to the previous array (Array concatenation using spread)
     setMovies((prevMovies) => [...prevMovies, newMovie]);
   };
 

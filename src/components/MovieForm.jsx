@@ -83,7 +83,7 @@ function MovieForm({ initialValues, onSubmit, buttonLabel }) {
                 className="bg-gray-800 pl-1 xxs:py-0 sm:py-1 rounded-sm placeholder:text-gray-500"
               />
               <ErrorMessage
-                name="cast"
+                name="trailer"
                 component="div"
                 className="text-red-400"
               />

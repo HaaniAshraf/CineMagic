@@ -12,17 +12,18 @@ import { saveUserDetails } from "../redux/reducers/userReducer";
 const Login = () => {
   const dispatch = useDispatch();
   const {
+    // This function is used to register an input
     register,
     handleSubmit,
+    // The errors object within formState is critical for validation handling.
     formState: { errors },
   } = useForm();
 
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
   const getUserDetails = (email, password) => {
-    const users = localStorage.getItem("users");
-    const parsedUsers = JSON.parse(users);
-    return parsedUsers.find(
+    const users = JSON.parse(localStorage.getItem("users"));
+    return users.find(
       (user) => user.email === email && user.password === password
     );
   };

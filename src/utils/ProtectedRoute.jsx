@@ -12,7 +12,7 @@ const ProtectedRoute = ({ allowedRoles }) => {
       //  { replace: true } replaces the current entry in the history stack instead of adding a new one.
       // This prevents users from being able to go back to the protected page they were just redirected from using the browser's back button.
     } else if (allowedRoles && !allowedRoles.includes(userDetails.role)) {
-      navigate("/home", { replace: true }); 
+      navigate("/", { replace: true }); 
     }
   }, [userDetails, navigate, allowedRoles]);
   return userDetails ? <Outlet /> : null;

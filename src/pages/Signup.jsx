@@ -24,6 +24,7 @@ function Signup() {
   // Function to get users from localStorage
   const getUsers = () => {
     const users = localStorage.getItem("users");
+    // JSON.parse is used to convert a JSON string back into a JavaScript object.
     return users ? JSON.parse(users) : [];
   };
   // Function to check if a user exists
@@ -60,11 +61,9 @@ function Signup() {
     if (validate()) {
       const newUserDetails = { name, email, phone, password, role: "user" };
       const users = getUsers();
-      if (userExists(email)) {
-        setErrors({ ...errors, email: "Email already exists." });
-        return;
-      }
       users.push(newUserDetails);
+      // Localstorage data is stored in key-value pairs which should be strings.
+      // JSON.stringify is used to convert a JavaScript object into a JSON string.(Here,'users' is an array)
       localStorage.setItem("users", JSON.stringify(users));
       dispatch(saveUserDetails(newUserDetails));
       navigate("/");
